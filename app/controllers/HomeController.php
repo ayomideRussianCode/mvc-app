@@ -4,7 +4,7 @@ class HomeController{
 
     public function index() {
 
-        return "returning HOME view";
+        echo "returning HOME view";
     }
 
     public function about()

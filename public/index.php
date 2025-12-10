@@ -5,11 +5,30 @@ require_once __DIR__ . '/../routes/web.php';
 
 $request = isset($_GET['url']) ? rtrim($_GET['url'], '/') : '';
 
-if (array_key_exists($request, $routes)){
 
-    echo "TRUE IT DOES EXIST";
+if (array_key_exists($request, $routes)) {
 
-}else {
+    $route = explode('@', $routes[$request]);
 
-    echo "It doesn't exist";
-}
+    // controllerName - 0 || HomeController
+    $controllerName = $route[0];
+
+    // methodname -1 || index
+    $methodName = $route[1]; 
+    $controller =  new $controllerName();
+    $controller->$methodName();
+} else {
+
+    echo "404 - Page not found";
+};
+
+?>
+
+
+
+<!-- // echo "
+<pre>";
+
+//    print_r($route) ;
+
+//   echo  "</pre>"; -->
