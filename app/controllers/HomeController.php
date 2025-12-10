@@ -4,12 +4,11 @@ class HomeController{
 
     public function index() {
 
-        echo "returning HOME view";
-    }
+        $message = "Hey Baby";
 
-    public function about()
-    {
+    require_once __DIR__ . '/../views/home/index.php';  
 
-        return "returning ABOUT view";
-    }
+}
+
+   
 }
