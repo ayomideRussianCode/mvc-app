@@ -1,3 +1,3 @@
 <?php
 
-const base_url = '';
+const BASE_URL = 'http://mvc-app.local/';
