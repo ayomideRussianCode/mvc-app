@@ -1,6 +1,7 @@
-<?php
+<h1>
+    <?= $title; ?>
+</h1>
 
-echo $message;
-?>
-
-<h1>This is the HOME View</h1>
+<h2>
+    <?= $message; ?>
+</h2>

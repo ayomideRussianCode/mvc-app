@@ -1,5 +1,5 @@
 <?php  
-function render ($view, $data = []) {
+function render ($view, $data = [], $layout = 'layout') {
 
     extract($data);
 
@@ -9,5 +9,5 @@ function render ($view, $data = []) {
 
     $content = ob_get_clean();
 
-    require __DIR__ . '/views/layout.php';
+    require __DIR__ . "/views/" . $layout. '.php';
 }
