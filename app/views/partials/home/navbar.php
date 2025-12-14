@@ -1,23 +1,22 @@
-   <nav>
-       <ul>
-           <li>
-               <a href="<?php echo base_url('/'); ?>">Home</a>
-           </li>
-
-           <!-- When the user is logged in -->
-           <li>
-               <a href="<?php echo base_url('about'); ?>">About</a>
-           </li>
-           <li>
-               <a href="<?php echo base_url('logout'); ?>">Logout</a>
-           </li>
-
-           <!-- When the user is not logged in -->
-           <li>
-               <a href="<?php echo base_url('register'); ?>">Register</a>
-           </li>
-           <li>
-               <a href="<?php echo base_url('login'); ?>">Login</a>
-           </li>
-       </ul>
-   </nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="<?php echo base_url('/'); ?>">Home</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url('admin'); ?>">Admin</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url('about'); ?>">About</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url('contact'); ?>">Contact</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url('login'); ?>">Login</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="<?php echo base_url('user/register'); ?>">Register</a>
+          </li>
+      </ul>
+  </nav>

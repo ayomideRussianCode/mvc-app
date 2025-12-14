@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/styles.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('/css/styles.css') ?>">
 </head>
 
 <body class="index">
  
 <?php require views_path('partials/home/navbar.php');?>
+
     <div class="container">
         <div class="hero">
             <div class="hero-content">

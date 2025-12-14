@@ -44,7 +44,7 @@ function redirect ($path = '',  $queryParams = []) {
         $url .= "?" . http_build_query($queryParams);
     }
     
-    header("Location:" . $url);
+    header("Location: " . $url);
     exit();
 }
 
