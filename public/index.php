@@ -15,7 +15,8 @@ if (isset($routes[$method][$request])) {
 
     require_once __DIR__ . '/../app/controllers/' .$controller . '.php';
 
-    $controllerInstance = new $controller();
+    $controllerInstance = new $controller;
+    
     $controllerInstance->$action();
 } else {
     http_response_code(404);

@@ -3,24 +3,20 @@
  class UserController{
 
 
-    public function register () {
+  
+    public function register() {
 
-        $data = [
-
-            'title' => "rRegister"
-        ];
-
-        render('user/register', $data);
-
+      var_dump($_POST);
     }
 
-    public function registerUser() {
+    public function showRegisterForm() {
 
         $data = [
 
             'title' => "Register"
         ];
 
-        render ('user/register', $data);
+        render('user/register', $data);
+
     }
  }

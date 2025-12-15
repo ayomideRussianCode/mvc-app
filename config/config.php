@@ -13,7 +13,7 @@ return [
     ],
 
     'app' => [
-        'base_url' => 'https://mvc-app.local/',
+        'base_url' => 'http://mvc-app.local/',
         'debug' => true,
 
     ]

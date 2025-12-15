@@ -19,7 +19,7 @@ function base_url($path='') {
 
     return $protocol . $host . $base . '/' . ltrim($path, '/');
 
-}
+} 
 
 function base_path($path = '') {
 
