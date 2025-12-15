@@ -3,24 +3,41 @@
 require_once __DIR__ . '/../app/init.php';
 require_once __DIR__ . '/../routes/web.php';
 
-$request = isset($_GET['url']) ? rtrim($_GET['url'], '/') : '';
+// $request = isset($_GET['url']) ? rtrim($_GET['url'], '/') : '';
 
+$request = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-if (array_key_exists($request, $routes)) {
+$method = $_SERVER['REQUEST_METHOD'];
 
-    $route = explode('@', $routes[$request]);
+if (isset($routes[$method][$request])) {
 
-    // controllerName - 0 || HomeController
-    $controllerName = $route[0];
+    list($controller, $action) = explode('@', $routes[$method][$request]);
 
-    // methodname -1 || index
-    $methodName = $route[1]; 
-    $controller =  new $controllerName();
-    $controller->$methodName();
+    require_once __DIR__ . '/../app/controllers/' .$controller . '.php';
+
+    $controllerInstance = new $controller();
+    $controllerInstance->$action();
 } else {
+    http_response_code(404);
+    echo "404 Not found";
+}
 
-    echo "404 - Page not found";
-};
+
+// if (array_key_exists($request, $routes)) {
+
+//     $route = explode('@', $routes[$request]);
+
+//     // controllerName - 0 || HomeController
+//     $controllerName = $route[0];
+
+//     // methodname -1 || index
+//     $methodName = $route[1]; 
+//     $controller =  new $controllerName();
+//     $controller->$methodName();
+// } else {
+
+//     echo "404 - Page not found";
+// };
 
 ?>
 

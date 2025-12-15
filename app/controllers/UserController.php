@@ -5,7 +5,22 @@
 
     public function register () {
 
-        render('user/register');
+        $data = [
 
+            'title' => "rRegister"
+        ];
+
+        render('user/register', $data);
+
+    }
+
+    public function registerUser() {
+
+        $data = [
+
+            'title' => "Register"
+        ];
+
+        render ('user/register', $data);
     }
  }

@@ -1,8 +1,45 @@
 <?php
 
-$routes = [
-    '' => 'HomeController@index',
-    'about' => 'HomeController@about',
-    'user/register' => 'UserController@register',
 
-];
+
+$routes = [
+
+    'GET' => [
+    '/' => 'HomeController@index',
+    '/about' => 'HomeController@about',
+    '/user/register' => 'UserController@register',
+    
+    ],
+
+    'POST' => [
+        'register' => 'UserController@register',
+
+    ]
+    ];
+
+
+
+
+
+
+// $routes = [
+//     '' => 'HomeController@index',
+//     'about' => 'HomeController@about',
+//     'user/register' => 'UserController@register',
+
+
+// ];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
