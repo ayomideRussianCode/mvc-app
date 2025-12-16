@@ -2,16 +2,20 @@
 
 class User
 {
-
     private $table = 'users';
-
     public $id;
-
     public $username;
-
-    public $password;
-
     public $email;
+    public $password;
+    public $first_name;
+    public $last_name;
+    public $phone;
+    public $birthdate;
+    public $organization;
+    public $location;
+    public $profile_image;
+    public $created_at;
+    public $updated_at;
 
     private $conn;
 
@@ -41,4 +45,26 @@ class User
         }
         return false;
     }
+
+    public function login() {
+
+        $query = " SELECT * FROM $this->table WHERE email = :email ";
+        $stmt = $this->conn->prepare($query);
+
+        $this -> email = sanitize($this->email);
+
+        $stmt->bindParam(':email', $this->email);
+        $stmt->execute();
+        $dbUser = $stmt->fetch(PDO::FETCH_OBJ);
+
+        if($dbUser && password_verify($this->password, $dbUser->password)){
+
+            $this->id = $dbUser->id;
+            $this->username = $dbUser->username;
+            return true;
+        }
+
+        return false;
+    }
+
 }
