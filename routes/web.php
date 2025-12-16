@@ -9,6 +9,8 @@ $routes = [
     '/about' => 'HomeController@about',
     '/user/register' => 'UserController@showRegisterForm',
     '/user/login' => 'UserController@showLoginForm',
+    '/dashboard' => 'AdminController@dashboard',
+
 
 
     ],
