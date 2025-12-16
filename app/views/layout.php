@@ -35,7 +35,7 @@
                         <a class="nav-link active" aria-current="page" href="<?php echo base_url('/'); ?>">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('admin'); ?>">Admin</a>
+                        <a class="nav-link" href="<?php echo base_url('dashboard'); ?>">Admin</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href=" <?php echo base_url('about'); ?>">About</a>

@@ -13,9 +13,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="<?php echo base_url('plugins/fontawesome-free/css/all.min.css');?>">
+    <link rel="stylesheet" href="<?php echo base_url('plugins/fontawesome-free/css/all.min.css'); ?>">
     <!-- Theme style -->
-    <link rel="stylesheet" href=" <?php echo base_url('dist/css/adminlte.min.css');?>">
+    <link rel="stylesheet" href=" <?php echo base_url('dist/css/adminlte.min.css'); ?>">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -29,10 +29,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="index3.html" class="nav-link">Home</a>
+                    <a href="<?php echo base_url('/') ?>" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Contact</a>
+                    <a href="<?php echo base_url('contact') ?>" class="nav-link">Contact</a>
                 </li>
             </ul>
 
@@ -259,7 +259,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
-                     <?php echo $content; ?>
+                        <?php echo $content; ?>
                         <!-- /.col-md-6 -->
                     </div>
                     <!-- /.row -->
@@ -294,11 +294,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- REQUIRED SCRIPTS -->
 
     <!-- jQuery -->
-    <script src="<?php echo base_url('plugins/jquery/jquery.min.js');?>"></script>
+    <script src="<?php echo base_url('plugins/jquery/jquery.min.js'); ?>"></script>
     <!-- Bootstrap 4 -->
     <script src="<?php echo base_url('plugins/bootstrap/js/bootstrap.bundle.min.js'); ?> "></script>
     <!-- AdminLTE App -->
-    <script src=" <?php echo base_url('dist/js/adminlte.min.js');?> "></script>
+    <script src=" <?php echo base_url('dist/js/adminlte.min.js'); ?> "></script>
 </body>
 
 </html>

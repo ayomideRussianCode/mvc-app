@@ -26,5 +26,15 @@ class HomeController
 
     }
 
+    public function contact()
+    {
+        $data = [
+            'title' => 'Contact Page',
+            'message' => 'Welcome to the Contact Page',
+        ];
+
+        render('home/contact', $data);
+    }
+
 
 }
