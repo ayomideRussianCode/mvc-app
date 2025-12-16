@@ -20,6 +20,23 @@
 
     }
 
+    public function register()
+    {
+
+        $user = new User();
+
+        $user->username = $_POST['username'];
+        $user->email = $_POST['email'];
+        $user->password = $_POST['password'];
+
+        if ($user->store()) {
+            redirect('/');
+        } else {
+
+            echo "Registration failed";
+        }
+    }
+
     public function showLoginForm()
     {
 
@@ -41,27 +58,19 @@
             $_SESSION['id'] = $this->userModel->id;
             $_SESSION['username'] = $this->userModel->username;
 
-                redirect('/');
+                redirect('/dashboard');
             } else {
                 echo "There was an error";
             }
     }
 
-    public function register()
-    {
 
-        $user = new User();
+    public function logout() {
 
-        $user->username = $_POST['username'];
-        $user->email = $_POST['email'];
-        $user->password = $_POST['password'];
+        $_SESSION = [];
 
-        if($user->store()) {
-            redirect('/');
-        } else {
+        session_destroy();
 
-            echo "Registration failed";
-            
-        }
+        redirect('/user/login');
     }
  }

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>CMS PDO System</title>
+    <title>MVC APP</title>
     <!-- Bootstrap CSS -->
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -16,7 +16,7 @@
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">CMS PDO System</a>
+            <a class="navbar-brand" href="#">MVC APP</a>
             <button
                 class="navbar-toggler"
                 type="button"
@@ -34,18 +34,24 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="<?php echo base_url('/'); ?>">Home</a>
                     </li>
+                    <?php if (!isLoggedIn()): ?>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url('dashboard'); ?>">Admin</a>
                     </li>
+                    
+                    <?php else : ?>
+                          <li class="nav-item">
+                        <a class="nav-link" href="<?php echo base_url('user/login'); ?>">Login</a>
+                    </li>
+
+                    <?php endif; ?>
                     <li class="nav-item">
                         <a class="nav-link" href=" <?php echo base_url('about'); ?>">About</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url('contact'); ?>">Contact</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo base_url('user/login'); ?>">Login</a>
-                    </li>
+                  
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo base_url('user/register'); ?>">Register</a>
                     </li>
@@ -57,7 +63,7 @@
     <!-- Header Section -->
     <header class="bg-dark text-white py-5">
         <div class="container">
-            <h1 class="display-4">Welcome to the CMS PDO System</h1>
+            <h1 class="display-4">Welcome to the MVC APP</h1>
             <p class="lead">
                 Sharing insights, ideas, and stories.
             </p>
@@ -74,7 +80,7 @@
     <footer class="bg-light py-4">
         <div class="container text-center">
             <p class="text-muted mb-0">
-                &copy; 2045 CMS PDO System. All rights reserved by Edwin Diaz from EdwinDiaz.com
+                &copy; 2045 MVC APP. All rights reserved by Ayomide from Ayomide.com
             </p>
         </div>
     </footer>

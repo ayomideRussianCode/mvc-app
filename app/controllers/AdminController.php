@@ -3,6 +3,8 @@
 class AdminController{
 
     public function __construct() {
+
+        AuthMiddleware::requiredLogin();
     }
 
     public function dashboard() {
@@ -14,4 +16,6 @@ class AdminController{
 
         render('admin/dashboard', $data, 'layouts/admin_layout');
     }
+
+   
 }
