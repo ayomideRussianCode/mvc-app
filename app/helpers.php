@@ -73,9 +73,8 @@ function config($key) {
         if(!isset($value[$k])){
             throw new Exception("Config key '{$k}' not found");
 
-            $value = $value[$k];
         }
-
-        return $value;
+        $value = $value[$k];
     }
+    return $value;
 }
