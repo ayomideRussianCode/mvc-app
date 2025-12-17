@@ -29,10 +29,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="<?php echo base_url('/') ?>" class="nav-link">Home</a>
+                    <a href="<?php echo base_url('dashboard') ?>" class="nav-link">Home</a>
                 </li>
+                
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="<?php echo base_url('contact') ?>" class="nav-link">Contact</a>
+                    <a href="<?php echo base_url('admin/users/profile') ?>" class="nav-link">Profile</a>
                 </li>
             </ul>
 
@@ -255,8 +256,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
-                        <?php echo $content; ?>
-                        <!-- /.col-md-6 -->
+                    <?php echo $content; ?>
+                    <!-- /.col-md-6 -->
                     <!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>

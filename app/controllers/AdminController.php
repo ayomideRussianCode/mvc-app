@@ -28,5 +28,14 @@ class AdminController{
 
     }
 
-   
+    public function showProfile()
+    {
+
+        $data = [
+            'title' => 'Profile',
+            'message' => 'Welcome to the Profile Page',
+        ];
+
+        render('admin/users/profile', $data, 'layouts/admin_layout');
+    }
 }
