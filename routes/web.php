@@ -23,6 +23,8 @@ $routes = [
         '/register' => 'UserController@register',
         '/login' => 'UserController@loginUser',
         '/logout' => 'UserController@logout',
+        '/admin/users/update' => 'UserController@updateProfile',
+
 
 
 

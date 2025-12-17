@@ -37,6 +37,30 @@ class User
 
     }
 
+    public function update($userId, $userData) {
+
+         $fields = [];
+
+         foreach($userData as $key =>$value){
+            $fields[] = "{$key} = :{$key}";
+         }
+
+         $sql = " UPDATE $this->table SET " . implode(', ', $fields). " WHERE id = :id ";
+         $stmt = $this->conn->prepare($sql);
+
+        foreach ($userData as $key => $value) {
+            if ($value=== ''){
+                $stmt->bindValue(":{$key}", null, PDO::PARAM_NULL);
+            }else {
+                $stmt->bindValue(":{$key}", $value);
+            }
+        }
+
+        $stmt->bindValue(":id", $userId, PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
+
     public function store()
     {
 
