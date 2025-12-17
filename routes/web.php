@@ -12,7 +12,9 @@ $routes = [
     '/user/login' => 'UserController@showLoginForm',
     '/dashboard' => 'AdminController@dashboard',
      '/admin' => 'AdminController@admin',
-     '/admin/users/profile' => 'AdminController@showProfile',
+    '/admin/users/profile' => 'UserController@showProfile',
+
+
 
 
     ],
@@ -21,6 +23,8 @@ $routes = [
         '/register' => 'UserController@register',
         '/login' => 'UserController@loginUser',
         '/logout' => 'UserController@logout',
+
+
 
 
 
