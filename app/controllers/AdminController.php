@@ -20,8 +20,8 @@ class AdminController{
     public function admin(){
 
         $data = [
-            'title' => 'Dashboard',
-            'message' => 'Welcome to the Dashboard Page',
+            'title' => 'Admin',
+            'message' => 'Welcome to the Admin Page',
         ];
 
         render('admin/index', $data, 'layouts/admin_layout');

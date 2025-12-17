@@ -4,7 +4,7 @@
     <!-- Contact Form -->
     <div class="col-md-6">
         <h2>Get in Touch</h2>
-        <form action="mailto:edwin@edwindiaz.com.com" method="post" enctype="text/plain">
+        <form action="mailto:ayindeayomide7@gmail.com" method="post" enctype="text/plain">
             <div class="mb-3">
                 <label for="name" class="form-label">Name *</label>
                 <input
@@ -40,13 +40,13 @@
         </p>
         <ul class="list-unstyled">
             <li>
-                <strong>Email:</strong> <a href="mailto:edwin@edwindiaz.com.com">edwin@edwindiaz.com.com</a>
+                <strong>Email:</strong> <a href="mailto:ayindeayomide7@gmail.com">ayindeayomide7@gmail.com</a>
             </li>
             <li>
                 <strong>Phone:</strong> (123) 456-7890
             </li>
             <li>
-                <strong>Address:</strong> 123 Blog Street, City, Country
+                <strong>Address:</strong> Oyo, Nigeria.
             </li>
         </ul>
         <h2>Follow Us</h2>

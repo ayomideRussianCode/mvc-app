@@ -13,7 +13,7 @@
               <?php else: ?>
 
               <li class="nav-item">
-                  <a class="nav-link" href="<?php echo base_url('dashboard'); ?>">Admin</a>
+                  <a class="nav-link" href="<?php echo base_url('admin'); ?>">Admin</a>
               </li>
 
           <?php endif; ?>
