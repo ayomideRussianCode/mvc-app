@@ -126,8 +126,28 @@
 
         ];
 
+        if(isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK ){
+
+            $imagePath = $this->userModel->handleImageUpload($_FILES['profile_image']);
+
+            if($imagePath) {
+                $userData['profile_image'] = $imagePath;
+            } else {
+                setSessionMessage('error', 'Failed to upload Image');
+                redirect('/admin/users/profile');
+            }
+        }
+
         $updateStatus = $this->userModel->update($userId, $userData);
 
-        var_dump($updateStatus);
+        if($updateStatus) {
+
+            setSessionMessage( 'message', 'Profile updated successfully');
+
+        } else {
+            setSessionMessage('error', 'Failed to update profile');
+        }
+        redirect('/admin/users/profile');
     }
+
  }
