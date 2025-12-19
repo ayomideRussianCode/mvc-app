@@ -64,6 +64,17 @@ class User
         return $stmt->execute();
     }
 
+    public function updatePassword($userId, $newPassword) {
+        $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
+
+        $query = " UPDATE $this->table SET password = :password WHERE id = :id ";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $userId, PDO::PARAM_INT);
+        $stmt->bindParam(':password', $hashedPassword, PDO::PARAM_STR);
+
+        return $stmt->execute();
+    }
+
     
     public function handleImageUpload($file){
 
@@ -142,3 +153,4 @@ class User
     }
 
 }
+
