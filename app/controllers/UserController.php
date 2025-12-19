@@ -143,6 +143,7 @@
         if($updateStatus) {
 
             setSessionMessage( 'message', 'Profile updated successfully');
+            $_SESSION['active_tab'] = '#password';
 
         } else {
             setSessionMessage('error', 'Failed to update profile');
@@ -169,8 +170,9 @@
         $updateStatus = $this->userModel->updatePassword($userId, $newPassword);
         if ($updateStatus) {
             setSessionMessage('message', 'Passwords updated successfully');
+            $_SESSION['active_tab'] = '#password';
         } else {
-            setSessionMessage('message', 'Failed to update password');
+            setSessionMessage('error', 'Failed to update password');
         }
         redirect('/admin/users/profile');
     }
