@@ -29,14 +29,51 @@ class Route{
     public function dispatch(){
 
         $method = $_SERVER['REQUEST_METHOD'];
-        $requestUrl = parse_url ($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        $cleanedRequest = $this->formatRoute($requestUrl);
+        $requestUri = parse_url ($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $cleanedRequest = $this->formatRoute($requestUri);
 
-        foreach($this->routes[$method] as $route=>$handler){
+        if($this->match($method, $cleanedRequest)){
+
+            $handler = $this->match($method, $cleanedRequest);
+
+            list($controller, $action) = explode('@', $handler['handler']);
+            $params = $handler['params'];
+
+            $this->callAction($controller, $action, $params = []);
 
         }
 
+    
+
     }
+
+    public function match($method, $requestUri) {
+        foreach ($this->routes[$method] as $route => $handler) {
+
+            $pattern =   preg_replace('#\{[a-zA-Z0-9_]+}#', '{[a-zA-Z0-9_]+}', $route);
+            if (preg_match('#^' . $pattern . '$#', $requestUri, $matches)) {
+
+                array_shift($matches);
+                return [
+                    'handler' => $handler,
+                    'params' => $matches
+                ];
+            };
+        }
+        return false;
+    }
+
+    protected function callAction ($controller, $action, $params = []) {
+
+        require_once base_path('/app/controllers/'  . $controller . '.php');
+        $controllerInstance = new $controller();
+        call_user_func_array([$controllerInstance, $action], $params);
+
+        echo "<pre>";
+        print_r($controllerInstance);
+        echo "</pre>";
+    }
+    
 
 }
 ?>

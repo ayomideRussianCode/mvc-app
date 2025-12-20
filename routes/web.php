@@ -2,7 +2,7 @@
 
 $router = new Route();
 
-$router->get('/user/test', 'UserController@test');
+$router->get('/user/test/', 'UserController@test');
 
 $router->dispatch();
 
