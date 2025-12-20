@@ -1,6 +1,10 @@
 <?php
 
+$router = new Route();
 
+$router->get('/user/test', 'UserController@test');
+
+$router->dispatch();
 
 $routes = [
 

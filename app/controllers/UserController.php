@@ -177,4 +177,9 @@
         redirect('/admin/users/profile');
     }
 
+    public function test(){
+
+        var_dump('works');
+    }
+
  }
