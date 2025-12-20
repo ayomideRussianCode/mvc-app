@@ -3,25 +3,27 @@
 require_once __DIR__ . '/../app/init.php';
 require_once __DIR__ . '/../routes/web.php';
 
-// $request = isset($_GET['url']) ? rtrim($_GET['url'], '/') : '';
+$router->dispatch();
 
-$request = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+// // $request = isset($_GET['url']) ? rtrim($_GET['url'], '/') : '';
 
-$method = $_SERVER['REQUEST_METHOD'];
+// $request = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-if (isset($routes[$method][$request])) {
+// $method = $_SERVER['REQUEST_METHOD'];
 
-    list($controller, $action) = explode('@', $routes[$method][$request]);
+// if (isset($routes[$method][$request])) {
 
-    require_once __DIR__ . '/../app/controllers/' .$controller . '.php';
+//     list($controller, $action) = explode('@', $routes[$method][$request]);
 
-    $controllerInstance = new $controller;
+//     require_once __DIR__ . '/../app/controllers/' .$controller . '.php';
+
+//     $controllerInstance = new $controller;
     
-    $controllerInstance->$action();
-} else {
-    http_response_code(404);
-    echo "404 Not found";
-}
+//     $controllerInstance->$action();
+// } else {
+//     http_response_code(404);
+//     echo "404 Not found";
+// }
 
 
 // if (array_key_exists($request, $routes)) {
