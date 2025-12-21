@@ -29,7 +29,8 @@ class User
         $this->conn = Database::getInstance()->getConnection();
     }
 
-    public function getUserById($userId) {
+    public function getUserById($userId)
+    {
 
         $query = " SELECT * FROM users WHERE id = :id ";
         $stmt = $this->conn->prepare($query);
@@ -37,24 +38,24 @@ class User
         $stmt->execute();
 
         return $stmt->fetchObject();
-
     }
 
-    public function update($userId, $userData) {
+    public function update($userId, $userData)
+    {
 
-         $fields = [];
-
-         foreach($userData as $key =>$value){
-            $fields[] = "{$key} = :{$key}";
-         }
-
-         $sql = " UPDATE $this->table SET " . implode(', ', $fields). " WHERE id = :id ";
-         $stmt = $this->conn->prepare($sql);
+        $fields = [];
 
         foreach ($userData as $key => $value) {
-            if ($value=== ''){
+            $fields[] = "{$key} = :{$key}";
+        }
+
+        $sql = " UPDATE $this->table SET " . implode(', ', $fields) . " WHERE id = :id ";
+        $stmt = $this->conn->prepare($sql);
+
+        foreach ($userData as $key => $value) {
+            if ($value === '') {
                 $stmt->bindValue(":{$key}", null, PDO::PARAM_NULL);
-            }else {
+            } else {
                 $stmt->bindValue(":{$key}", $value);
             }
         }
@@ -64,7 +65,8 @@ class User
         return $stmt->execute();
     }
 
-    public function updatePassword($userId, $newPassword) {
+    public function updatePassword($userId, $newPassword)
+    {
         $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
 
         $query = " UPDATE $this->table SET password = :password WHERE id = :id ";
@@ -75,16 +77,17 @@ class User
         return $stmt->execute();
     }
 
-    
-    public function handleImageUpload($file){
+
+    public function handleImageUpload($file)
+    {
 
         $maxSize = 5 * 1024 * 1024; //max file size 5mb
         $tempLocation = $file['tmp_name'];
 
 
-        if($file['size'] > $maxSize){
+        if ($file['size'] > $maxSize) {
 
-            $_SESSION['error']= "File exceeds 5MB limit";
+            $_SESSION['error'] = "File exceeds 5MB limit";
             return false;
         }
 
@@ -92,20 +95,19 @@ class User
 
         $fileName = uniqid('user_', true) . '.' . $fileExtension;
 
-        if(!file_exists($this->uploadDir)) {
+        if (!file_exists($this->uploadDir)) {
             mkdir($this->uploadDir, 0755, true);
         }
 
         $filePath = $this->uploadDir . $fileName;
 
-        if (move_uploaded_file($tempLocation, $filePath)){
+        if (move_uploaded_file($tempLocation, $filePath)) {
             return $filePath;
         } else {
             $_SESSION['error'] = "Failed to upload from userModel";
 
             return false;
         }
-    
     }
 
     public function store()
@@ -128,18 +130,19 @@ class User
         return false;
     }
 
-    public function login() {
+    public function login()
+    {
 
         $query = " SELECT * FROM $this->table WHERE email = :email ";
         $stmt = $this->conn->prepare($query);
 
-        $this -> email = sanitize($this->email);
+        $this->email = sanitize($this->email);
 
         $stmt->bindParam(':email', $this->email);
         $stmt->execute();
         $dbUser = $stmt->fetch(PDO::FETCH_OBJ);
 
-        if($dbUser && password_verify($this->password, $dbUser->password)){
+        if ($dbUser && password_verify($this->password, $dbUser->password)) {
 
             $this->id = $dbUser->id;
             $this->username = $dbUser->username;
@@ -151,6 +154,4 @@ class User
 
         return false;
     }
-
 }
-

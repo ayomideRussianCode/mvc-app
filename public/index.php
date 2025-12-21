@@ -3,7 +3,16 @@
 require_once __DIR__ . '/../app/init.php';
 require_once __DIR__ . '/../routes/web.php';
 
-$router->dispatch();
+Route::dispatch();
+
+
+
+
+
+
+
+
+
 
 // // $request = isset($_GET['url']) ? rtrim($_GET['url'], '/') : '';
 
@@ -43,6 +52,11 @@ $router->dispatch();
 // };
 
 ?>
+
+
+
+
+
 
 
 

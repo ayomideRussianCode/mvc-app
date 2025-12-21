@@ -1,56 +1,57 @@
 <?php
 
 
-class Route{
 
-    protected $routes = [
+class Route
+{
+
+    protected static $routes = [
         'GET' => [],
         'POST' => [],
     ];
 
-    public function get($path, $handler) {
-
-        $this->routes['GET'][$this->formatRoute($path)] = $handler;
-
-    }
-
-    public function post($path, $handler)
+    public static function get($path, $handler)
     {
 
-        $this->routes['GET'][$this->formatRoute($path)] = $handler;
+        self::$routes['GET'][self::formatRoute($path)] = $handler;
+    }
+
+    public static function post($path, $handler)
+    {
+
+        self::$routes['POST'][self::formatRoute($path)] = $handler;
     }
 
 
-    protected function formatRoute($route){
+    protected static function formatRoute($route)
+    {
 
         return '/' . trim($route, '/');
     }
 
-    public function dispatch(){
+    public static function dispatch()
+    {
 
         $method = $_SERVER['REQUEST_METHOD'];
-        $requestUri = parse_url ($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        $cleanedRequest = $this->formatRoute($requestUri);
+        $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $cleanedRequest = self::formatRoute($requestUri);
 
-        if($this->match($method, $cleanedRequest)){
+        if (self::match($method, $cleanedRequest)) {
 
-            $handler = $this->match($method, $cleanedRequest);
+            $handler = self::match($method, $cleanedRequest);
 
             list($controller, $action) = explode('@', $handler['handler']);
             $params = $handler['params'];
 
-            $this->callAction($controller, $action, $params = []);
-
+            self::callAction($controller, $action, $params = []);
         }
-
-    
-
     }
 
-    public function match($method, $requestUri) {
-        foreach ($this->routes[$method] as $route => $handler) {
+    public static function match($method, $requestUri)
+    {
+        foreach (self::$routes[$method] as $route => $handler) {
 
-            $pattern =   preg_replace('#\{[a-zA-Z0-9_]+}#', '{[a-zA-Z0-9_]+}', $route);
+            $pattern = preg_replace('#\{[a-zA-Z0-9_]+}#', '{[a-zA-Z0-9_]+}', $route);
             if (preg_match('#^' . $pattern . '$#', $requestUri, $matches)) {
 
                 array_shift($matches);
@@ -63,17 +64,11 @@ class Route{
         return false;
     }
 
-    protected function callAction ($controller, $action, $params = []) {
+    protected static function callAction($controller, $action, $params = [])
+    {
 
-        require_once base_path('/app/controllers/'  . $controller . '.php');
+        require_once base_path('/app/controllers/' . $controller . '.php');
         $controllerInstance = new $controller();
         call_user_func_array([$controllerInstance, $action], $params);
-
-        echo "<pre>";
-        print_r($controllerInstance);
-        echo "</pre>";
     }
-    
-
 }
-?>

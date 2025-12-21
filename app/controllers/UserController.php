@@ -1,15 +1,18 @@
 <?php
 
- class UserController{
+class UserController
+{
 
     private $userModel;
 
-    public function __construct(){
+    public function __construct()
+    {
 
         $this->userModel = new User();
     }
 
-    public function showRegisterForm() {
+    public function showRegisterForm()
+    {
 
         $data = [
 
@@ -17,7 +20,6 @@
         ];
 
         render('user/register', $data);
-
     }
 
     public function register()
@@ -48,12 +50,13 @@
         render('user/login', $data);
     }
 
-    public function loginUser() {
+    public function loginUser()
+    {
 
         $this->userModel->email = $_POST['email'];
         $this->userModel->password = $_POST['password'];
 
-            if($this->userModel->login()){
+        if ($this->userModel->login()) {
 
             $_SESSION['user_id'] = $this->userModel->id;
             $_SESSION['username'] = $this->userModel->username;
@@ -62,13 +65,14 @@
 
 
             redirect('/dashboard');
-            } else {
-                echo "There was an error";
-            }
+        } else {
+            echo "There was an error";
+        }
     }
 
 
-    public function logout() {
+    public function logout()
+    {
 
         $_SESSION = [];
 
@@ -79,9 +83,9 @@
 
     public function showProfile()
     {
-       $userId =  $_SESSION['user_id'];
+        $userId =  $_SESSION['user_id'];
 
-       $user = $this->userModel->getUserById($userId);
+        $user = $this->userModel->getUserById($userId);
 
         $data = [
             'title' => 'Profile',
@@ -101,7 +105,8 @@
         render('admin/users/profile', $data, 'layouts/admin_layout');
     }
 
-    public function updateProfile() {
+    public function updateProfile()
+    {
 
         $userId = $_SESSION['user_id'];
 
@@ -126,11 +131,11 @@
 
         ];
 
-        if(isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK ){
+        if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
 
             $imagePath = $this->userModel->handleImageUpload($_FILES['profile_image']);
 
-            if($imagePath) {
+            if ($imagePath) {
                 $userData['profile_image'] = $imagePath;
             } else {
                 setSessionMessage('error', 'Failed to upload Image');
@@ -140,25 +145,25 @@
 
         $updateStatus = $this->userModel->update($userId, $userData);
 
-        if($updateStatus) {
+        if ($updateStatus) {
 
-            setSessionMessage( 'message', 'Profile updated successfully');
+            setSessionMessage('message', 'Profile updated successfully');
             $_SESSION['active_tab'] = '#password';
-
         } else {
             setSessionMessage('error', 'Failed to update profile');
         }
         redirect('/admin/users/profile');
     }
 
-    public function updateUserProfilePassword() {
+    public function updateUserProfilePassword()
+    {
 
         $userId = $_SESSION['user_id'];
 
         $newPassword = sanitize($_POST['new_password'] ?? '');
         $confirmPassword = sanitize($_POST['confirm_password'] ?? '');
 
-        if(empty($newPassword) || empty($confirmPassword)){
+        if (empty($newPassword) || empty($confirmPassword)) {
             setSessionMessage('error', 'Please fill all the required fields');
             redirect('/admin/users/profile');
         }
@@ -177,9 +182,5 @@
         redirect('/admin/users/profile');
     }
 
-    public function test(){
-
-        var_dump('works');
-    }
-
- }
+    public function test($id) {}
+}
