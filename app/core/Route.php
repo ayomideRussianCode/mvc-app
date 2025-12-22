@@ -1,7 +1,4 @@
 <?php
-
-
-
 class Route
 {
 
@@ -10,16 +7,63 @@ class Route
         'POST' => [],
     ];
 
+    protected static $nameRoutes = [];
+
+    protected static $lastAddedRoute = null;
+
     public static function get($path, $handler)
     {
+        $formattedPath = self::formatRoute($path);
+        self::$routes['GET'][$formattedPath] = $handler;
+        self::$lastAddedRoute = $formattedPath;
 
-        self::$routes['GET'][self::formatRoute($path)] = $handler;
+        return new static;
     }
 
     public static function post($path, $handler)
     {
 
-        self::$routes['POST'][self::formatRoute($path)] = $handler;
+        $formattedPath = self::formatRoute($path);
+        self::$routes['POST'][$formattedPath] = $handler;
+        self::$lastAddedRoute = $formattedPath;
+
+        return new static;
+    }
+
+    public static function name($routeName)
+    {
+
+        if (self::$lastAddedRoute !== null) {
+            self::$nameRoutes[$routeName] = self::$lastAddedRoute;
+            self::$lastAddedRoute = null;
+        } else {
+            throw new Exception("No route available for $routeName");
+        }
+        $lastRoute = array_key_last(self::$routes['GET'] + self::$routes['POST']);
+        if ($lastRoute !== null) {
+            self::$nameRoutes[$routeName] = $lastRoute;
+        }
+        return new static;
+    }
+
+
+
+    public static function route($name, $params = [])
+    {
+
+        if (!isset(self::$nameRoutes[$name])) {
+
+            throw new Exception("Route $name does not exist");
+        }
+
+        $route = self::$nameRoutes[$name];
+
+        foreach ($params as $key => $value) {
+
+            $route = str_replace('{' . $key . '}', $value, $route);
+        }
+
+        return $route;
     }
 
 
@@ -43,7 +87,7 @@ class Route
             list($controller, $action) = explode('@', $handler['handler']);
             $params = $handler['params'];
 
-            self::callAction($controller, $action, $params = []);
+            self::callAction($controller, $action, $params);
         }
     }
 
@@ -51,7 +95,7 @@ class Route
     {
         foreach (self::$routes[$method] as $route => $handler) {
 
-            $pattern = preg_replace('#\{[a-zA-Z0-9_]+}#', '{[a-zA-Z0-9_]+}', $route);
+            $pattern = preg_replace('#\{[a-zA-Z0-9_]+}#', '([a-zA-Z0-9_]+)', $route);
             if (preg_match('#^' . $pattern . '$#', $requestUri, $matches)) {
 
                 array_shift($matches);
@@ -66,7 +110,6 @@ class Route
 
     protected static function callAction($controller, $action, $params = [])
     {
-
         require_once base_path('/app/controllers/' . $controller . '.php');
         $controllerInstance = new $controller();
         call_user_func_array([$controllerInstance, $action], $params);

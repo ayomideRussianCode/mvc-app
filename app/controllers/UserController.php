@@ -51,12 +51,17 @@ class UserController
     }
 
     public function loginUser()
-    {
 
+    {
+        print_r($_POST);
         $this->userModel->email = $_POST['email'];
         $this->userModel->password = $_POST['password'];
+        print_r($_POST);
 
         if ($this->userModel->login()) {
+            echo "<pre>LoginUser called!</pre>";
+            print_r($_POST);
+            
 
             $_SESSION['user_id'] = $this->userModel->id;
             $_SESSION['username'] = $this->userModel->username;
@@ -182,5 +187,4 @@ class UserController
         redirect('/admin/users/profile');
     }
 
-    public function test($id) {}
 }

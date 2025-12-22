@@ -35,6 +35,11 @@ function views_path($path = '') {
 
 }
 
+function route($name, $parameters = []){
+
+    return Route::route($name, $parameters);
+}
+
 function redirect ($path = '',  $queryParams = []) {
 
     $url = base_url($path);
